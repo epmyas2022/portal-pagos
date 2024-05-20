@@ -1,36 +1,7 @@
-import usePocketBase from "../hooks/pocketbase";
-import { toast } from "react-toastify";
-import useMessages from "../hooks/messages";
-
-import router from "../routes/router";
+import useRegister from "../hooks/useRegister";
 export default function Register() {
-  const { handleMessages } = useMessages();
-  const pocketbase = usePocketBase();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formdata = new FormData(e.target.form);
-
-    const user = {
-      username: formdata.get("email").split("@")[0],
-      email: formdata.get("email"),
-      password: formdata.get("password"),
-      passwordConfirm: formdata.get("password"),
-      name: formdata.get("name"),
-      emailVisibility: true,
-      number_phone: formdata.get("phone"),
-    };
-
-    try {
-      await pocketbase.collection("users").create(user);
-      toast.success("Usuario creado correctamente");
-      await void e.target.form.reset();
-      router.navigate("/login");
-    } catch (error) {
-      const messages = handleMessages(error.response.data);
-      toast.error(`Error al crear el usuario: ${messages}`);
-    }
-  };
+ 
+  const { handleSubmit } = useRegister();
   return (
     <div className="sm:h-dvh flex justify-center bg-gradient-to-r from-slate-100 via-slate-200 to-slate-200">
       <div className=" bg-slate-50 xl:w-7/12 w-full flex flex-col sm:flex-row m-6 sm:gap-10 items-center rounded-lg border border-slate-300">
@@ -44,7 +15,7 @@ export default function Register() {
           <form className="flex flex-col gap-4 p-2">
             <label htmlFor="name">Nombre completo:</label>
             <input
-              className="focus:ring-amber-500 focus:border-amber-500"
+              className="focus:ring-amber-500 focus:border-amber-500 rounded-full"
               type="text"
               id="name"
               name="name"
@@ -53,7 +24,7 @@ export default function Register() {
             />
             <label htmlFor="email">Correo electronico:</label>
             <input
-              className="focus:ring-amber-500 focus:border-amber-500"
+              className="focus:ring-amber-500 focus:border-amber-500 rounded-full"
               type="email"
               id="email"
               name="email"
@@ -62,7 +33,7 @@ export default function Register() {
             />
             <label htmlFor="password">Contraseña:</label>
             <input
-              className="focus:ring-amber-500 focus:border-amber-500"
+              className="focus:ring-amber-500 focus:border-amber-500 rounded-full"
               type="password"
               id="password"
               name="password"
@@ -71,7 +42,7 @@ export default function Register() {
             />
             <label htmlFor="phone">Numero de telefono:</label>
             <input
-              className="focus:ring-amber-500 focus:border-amber-500"
+              className="focus:ring-amber-500 focus:border-amber-500 rounded-full"
               type="tel"
               id="phone"
               name="phone"
