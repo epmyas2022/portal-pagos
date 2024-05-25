@@ -1,7 +1,7 @@
 export default function AppBar() {
   return (
-    <div className="flex justify-between items-center p-4 ">
-      <h1 className="font-bold tracking-widest">Portal de pagos</h1>
+    <div className="flex justify-between items-center p-4 bg-white">
+      <h1 className="font-bold tracking-widest">Consulta Pagos</h1>
       <nav className="mr-4">
         <ul className="flex gap-3 items-center">
           <li>
