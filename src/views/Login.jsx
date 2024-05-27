@@ -11,7 +11,7 @@ export default function Login() {
           <TextField label="Contraseña" name="password" type="password" />
 
           <button
-            type="submit"
+            type="button"
             className="rounded-full bg-amber-500 ring-4 ring-amber-500 ring-opacity-50 text-white font-bold p-3"
           >
             Ingresar

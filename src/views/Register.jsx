@@ -3,7 +3,7 @@ import TextField from "../components/TextField";
 export default function Register() {
   const { handleSubmit, validates, sendData, errors } = useRegister();
   return (
-    <div className="flex justify-center bg-gradient-to-r from-slate-100 via-slate-200 to-slate-200">
+    <div className="flex justify-center bg-gradient-to-r from-slate-100 via-slate-200 to-slate-200 h-full">
       <div className=" bg-slate-50 xl:w-7/12 w-full flex flex-col sm:flex-row m-6 sm:gap-10 items-center rounded-lg border border-slate-300">
         <div className="sm:w-[50%] w-full bg-customYellowOpacity h-full flex items-center justify-center">
           <img className="object-cover" src="./food.png" alt="profile" />

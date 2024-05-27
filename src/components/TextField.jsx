@@ -55,7 +55,7 @@ export default function TextField({
 
         {isPassword ? (
           <div className=" mx-2 absolute right-0 top-[50%] translate-y-[-50%] ">
-            <button onClick={() => showPassword(name)}>
+            <button onClick={(e) =>{e.preventDefault(); showPassword(name)}}>
               <EyeIcon show={!showIcon} />
             </button>
           </div>
