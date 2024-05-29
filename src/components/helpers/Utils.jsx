@@ -1,5 +1,7 @@
 import React from "react";
 
+import { SlotProvider, useSlot } from "./providers/providers";
+
 /**
  * Render children if condition is true
  * @param {boolean} condition
@@ -76,9 +78,38 @@ export const RenderIfNotElse = ({ condition, children, elseChildren }) => {
  * </Slot>
  */
 export const Slot = ({ name, children, data = {} }) => {
-  return React.Children.map(children, (child) => {
+  return (
+    <SlotProvider value={data}>
+      {React.Children.map(children, (child) => {
+        if (
+          child.type === "template" &&
+          child.props.slot === name &&
+          child?.props?.children
+        ) {
+          return React.cloneElement(child.props.children);
+        }
+      })}
+    </SlotProvider>
+  );
+};
 
-    if (child.type === "template" && child.props.slot === name )
-      return React.cloneElement(child.props.children, { ...data });
-  });
+/**
+ * Render slot content children
+ * @param {Function|ReactNode} children
+ * @returns {ReactNode}
+ * @example
+ * <SlotContent>
+ * {(props) =><h1>Hola mundo {props.name}</h1>}
+ * </SlotContent>
+ */
+export const SlotContent = ({ children }) => {
+  const slotData = useSlot();
+
+  if (!(children instanceof Function)) return children;
+
+  if (slotData instanceof Array)
+    return slotData.map((data, index) => children(data, index));
+
+
+  return children(slotData);
 };
