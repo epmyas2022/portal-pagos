@@ -4,6 +4,7 @@ import Home from "../views/Home";
 import Register from "../views/Register";
 import Login from "../views/Login";
 import RouteProtected from "../components/auth/RouteProtected";
+import RoutePublic from "../components/auth/RoutePublic";
 
 export default createBrowserRouter([
   {
@@ -13,11 +14,12 @@ export default createBrowserRouter([
 
   {
     path: "/register",
-    element: <Register />,
+    element:  <RoutePublic children={Register}/>,
+    
   },
 
   {
     path: "/login",
-    element: <Login />,
+    element: <RoutePublic children={Login}/>,
   },
 ]);
