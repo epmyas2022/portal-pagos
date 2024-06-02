@@ -1,8 +1,9 @@
 import Messages from "../lib/messages";
 import PocketBaseInstance from "../lib/pocketbase";
 import { toast } from "react-toastify";
-import router from "../routes/router";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+
 
 export default function useRegister() {
   const { handleMessages } = Messages();
@@ -11,9 +12,12 @@ export default function useRegister() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors},
+    reset,
   } = useForm();
 
+
+  const navigate = useNavigate();
   const validates = {
     email: {
       register: register("email", {
@@ -57,10 +61,9 @@ export default function useRegister() {
     },
   };
 
-  const sendData = async (data) => {
-    console.log(data);
 
- 
+  const sendData = async (data) => {
+
     const user = {
       username: data.email.split("@")[0],
       email: data.email,
@@ -74,7 +77,9 @@ export default function useRegister() {
     try {
       await pocketbase.collection("users").create(user);
       toast.success("Usuario creado correctamente");
-      await router.navigate("/login");
+      reset();
+      navigate("/login");
+
     } catch (error) {
       const messages = handleMessages(error?.response?.data);
       toast.error(`Error al crear el usuario: ${messages}`);
