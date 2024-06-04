@@ -17,7 +17,7 @@ export default function Register() {
           <h1 className="text-3xl font-bold">Registrate</h1>
           <br />
           <form
-            onSubmit={handleSubmit(sendData, (error) => console.log(error))}
+            onSubmit={handleSubmit(sendData, (error ) => {})}
             className="flex flex-col p-2"
           >
             <TextField

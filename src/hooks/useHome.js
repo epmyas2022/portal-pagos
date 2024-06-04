@@ -70,7 +70,6 @@ export default function useHome() {
   };
 
   const addStudent = async (data) => {
-    console.log(data);
     try {
       await PocketBaseInstance().collection("estudiantes").create(data);
       loadStudents();
