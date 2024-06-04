@@ -88,6 +88,7 @@ export const Slot = ({ name, children, data = {} }) => {
         ) {
           return React.cloneElement(child.props.children);
         }
+        return children;
       })}
     </SlotProvider>
   );
@@ -109,7 +110,6 @@ export const SlotContent = ({ children }) => {
 
   if (slotData instanceof Array)
     return slotData.map((data, index) => children(data, index));
-
 
   return children(slotData);
 };

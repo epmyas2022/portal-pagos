@@ -18,6 +18,8 @@ export default function TextField({
   type,
   register = {},
   error = {},
+  value = "",
+  onChange,
 }) {
   const isPassword = type === "password";
 
@@ -47,7 +49,9 @@ export default function TextField({
           className={`ring-0 focus:ring-0 outline-none border-none rounded-full`}
           type={type}
           id={name}
+          onChange={onChange}
           name={name}
+          defaultValue={value || ""}
           required
           placeholder={label}
           autoComplete="off"
@@ -55,7 +59,12 @@ export default function TextField({
 
         {isPassword ? (
           <div className=" mx-2 absolute right-0 top-[50%] translate-y-[-50%] ">
-            <button onClick={(e) =>{e.preventDefault(); showPassword(name)}}>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                showPassword(name);
+              }}
+            >
               <EyeIcon show={!showIcon} />
             </button>
           </div>
